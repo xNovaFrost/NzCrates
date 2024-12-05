@@ -1,12 +1,16 @@
+---
 name: NzCrates
-version: 1.0.4-stable
+version: "1.0"
 author: Nozell
-api: [5.0.0]
+api:
+- 5.0.0
 main: Nozell\Crates\Main
-description: "Crates plugin with custom textures and items editing in game"
-depend: [Customies]
+description: Crates plugin with custom textures and items editing in game
+depend:
+- Customies
 permissions:
   nzcrates.admin:
     default: op
   nzcrates.default:
     default: true
+...

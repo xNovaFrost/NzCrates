@@ -45,9 +45,7 @@ class Loader
 
     public function LoadInvmenu(Main $main): void
     {
-        if (!InvMenuHandler::isRegistered()) {
-            InvMenuHandler::register($main);
-        }
+        if (!InvMenuHandler::isRegistered()) InvMenuHandler::register($main);
     }
     public function LoadLangs(Main $main): void
     {

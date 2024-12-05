@@ -64,6 +64,7 @@ class CrateListeners implements Listener
         }
 
         $item = $reward->getItem();
+        $rewardlore = $reward->getLore();
 
         if ($item === null) {
             $msg = LangManager::getInstance()->generateMsg("no-item", [], []);
@@ -84,13 +85,10 @@ class CrateListeners implements Listener
         $actionsQueue = [
             [
                 "actions" => [
-                    function (Player $player) use ($item, $playerInventory, $crate, $entity, $session) {
+                    function (Player $player) use ($item, $playerInventory, $crate, $entity, $session, $rewardlore) {
                         $msg = LangManager::getInstance()->generateMsg("won-item", ["{itemName}"], [$item->getName()]);
                         $player->sendMessage(TextFormat::colorize($msg));
-
-                        $item->setLore([]);
-                        $item->setLore([TextFormat::YELLOW . LangManager::getInstance()->generateMsg("crate-lore", ["{crate}"], [ucfirst($crate)])]);
-
+                        $item->setLore($rewardlore);
                         $playerInventory->addItem($item);
                         $session->reduceKey($crate);
 

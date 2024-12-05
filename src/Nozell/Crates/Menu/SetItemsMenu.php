@@ -41,7 +41,7 @@ class SetItemsMenu
                 $existingReward = $this->rewardManager->getRewardForSlot($this->crateType, $slot);
                 $chance = $existingReward ? $existingReward->getChance() : 0.1;
 
-                $crateItems[] = new Reward($item, $chance, $slot);
+                $crateItems[] = new Reward($item, $chance, $slot, $item->getLore());
             }
 
             $this->rewardManager->clearRewardsForCrate($this->crateType);

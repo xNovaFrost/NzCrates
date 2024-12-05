@@ -29,16 +29,17 @@ class CrateManager
         $filePath = $this->rewardsPath . $crateLabel . ".json";
         if (file_exists($filePath)) {
             $config = new Config($filePath, Config::JSON);
-            $rewardsData = $config->getAll();
+            $rewards = $config->getAll();
 
             $rewardManager = RewardManager::getInstance();
             $rewardManager->clearRewardsForCrate($crateLabel);
 
-            foreach ($rewardsData as $rewardData) {
+            foreach ($rewards as $rewardData) {
                 $reward = new Reward(
                     ItemSerializer::deserialize($rewardData['item']),
                     $rewardData['chance'],
-                    $rewardData['slot']
+                    $rewardData['slot'],
+                    $rewardData['lore']
                 );
                 $rewardManager->addRewardToCrate($crateLabel, $reward);
             }
@@ -63,6 +64,8 @@ class CrateManager
                 'item' => ItemSerializer::serialize($reward->getItem()),
                 'chance' => $reward->getChance(),
                 'slot' => $reward->getSlot(),
+                'lore' => $reward->getLore(),
+
             ];
         }, $rewards);
 
